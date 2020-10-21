@@ -1,0 +1,12 @@
+.appbar {
+    background-color: white;
+    width: calc(100% - 260px);
+}
+
+.app_menu {
+    color: black;
+}
+
+.drawer_paper{
+    background-color: tomato;
+}
