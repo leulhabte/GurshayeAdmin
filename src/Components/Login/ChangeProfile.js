@@ -5,6 +5,7 @@ import { AccountCircle, Fingerprint, LockOpen, Security } from '@material-ui/ico
 import axios from 'axios';
 import Loading from '../../Partials/Loading/Loading';
 import SnackBar from '../../Partials/SnackBar/SnackBar';
+import Cookies from 'js-cookie';
 
 const LogIn = ({ handelUser }) => {
     const classes = useStyles();
@@ -31,7 +32,11 @@ const LogIn = ({ handelUser }) => {
                 setMessage("Password Didn't match")
                 setOpen(true)
             } else {
-                const res = await axios.post('api/user/changeProfile', { name, password, new_password })
+                const res = await axios.post('api/user/changeProfile', { name, password, new_password },{
+                    headers: {
+                        'Authorization': Cookies.get('jwt')
+                    }
+                })
                 if (res.status === 200) {
                     handelUser(res.data.profile.Name, res.data.token)
                 }
