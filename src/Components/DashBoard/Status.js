@@ -3,6 +3,7 @@ import useStyles from './Styling';
 import { Box, Paper, Typography, Grid } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { Equalizer } from '@material-ui/icons';
+import NumberFormat from 'react-number-format';
 
 
 const Dashboard = ({ count, loading }) => {
@@ -17,7 +18,9 @@ const Dashboard = ({ count, loading }) => {
                             <Box display='flex' flexGrow={1} flexDirection='column' classes={{ root: classes.prediction_box }} justifyContent='center' alignItems='center' p={3}>
                                 <Typography>Total Prediction</Typography>
                                 <Box height={10} />
-                                {!loading && <Typography classes={{ root: classes.stat_typo }}>{count}</Typography>}
+                                {!loading && <Typography classes={{ root: classes.stat_typo }}>
+                                        <NumberFormat value = {count} displayType = 'text' thousandSeparator={true}/>
+                                    </Typography>}
                                 {loading && <Skeleton variant='text' width={70} height={40} />}
                             </Box>
                             <Box display='flex' flexGrow={2} flexDirection='column' classes={{ root: classes.prediction_box_2 }} justifyContent='center' alignItems='center' p={3}>
