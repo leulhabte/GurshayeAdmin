@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         height: '2rem',
         '&:hover':{
-            backgroundColor: Constants.light_blue
+            backgroundColor: 'rgb(113, 174,33)'
         },
         alignSelf: "center",
         marginLeft: theme.spacing(2)
@@ -42,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
         '&:hover':{
             backgroundColor: Constants.light_blue
         }
+    },
+    dialog_label:{
+        marginRight: '10px'
     }
 }));
 

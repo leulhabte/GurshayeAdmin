@@ -1,21 +1,22 @@
 import React from 'react';
 import useStyles from './Styling';
-import {Box, Typography, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton} from '@material-ui/core';
+import {List, ListItem, ListItemText, ListItemSecondaryAction, IconButton} from '@material-ui/core';
 import { Edit } from '@material-ui/icons';
+import {withRouter} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-const UserHeading =()=>{
+const UserHeading =({history})=>{
     const classes = useStyles();
     return(
         <div>
             <List classes = {{root: classes.user_heading}}>
                 <ListItem>
                     <ListItemText
-                        primary= "Leul Habte"
-                        // secondary= {<Typography classes={{root: classes.paper_label}}>@adminstrator</Typography>}
+                        primary= {Cookies.get('username')}
                     >
                     </ListItemText>
                     <ListItemSecondaryAction>
-                        <IconButton>
+                        <IconButton onClick = {()=>{history.push('/change')}}>
                             <Edit classes = {{root: classes.paper_label}}/>
                         </IconButton>
                     </ListItemSecondaryAction>
@@ -26,4 +27,4 @@ const UserHeading =()=>{
 
 }
 
-export default UserHeading;
+export default withRouter(UserHeading);

@@ -2,19 +2,19 @@ import React from 'react';
 import { Container, TextField, Button, Box, FormControl, InputLabel, Select, MenuItem, Grid } from '@material-ui/core';
 import { KeyboardTimePicker, KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import useStyles from './Styling';
+import useStyles from '../Styling';
 import 'date-fns';
-import SnackBar from '../../Partials/SnackBar/SnackBar';
+import SnackBar from '../../../Partials/SnackBar/SnackBar';
 
-const InsertFields = ({ handleDate, handleTime, matchDate, matchTime, handleTip, match_tip, setLeague, setTeam1, setTeam2, handelInsert, open, handleClose, message  }) => {
+const UpdatePrediction = ({  match_date, match_time, match_tip, league, team1, team2, handleTip, handleDate, handleTime, setTeam1, setTeam2 ,setLeague, handleUpdate, open, handleClose, message }) => {
     const classes = useStyles();
     return (
         <Container>
             <Box display='flex' flexDirection='column'>
-                <form onSubmit={handelInsert}>
+                <form onSubmit = {handleUpdate}>
                     <Grid container spacing={9}>
                         <Grid item md={6} xs={12}>
-                            <TextField label="League" fullWidth required onChange={(e) => { setLeague(e.target.value) }} />
+                            <TextField label="League" fullWidth required value = {league} onChange={(e) => { setLeague(e.target.value) }} />
                         </Grid>
                         <Grid item md={6} xs={12}>
                             <FormControl fullWidth>
@@ -32,10 +32,10 @@ const InsertFields = ({ handleDate, handleTime, matchDate, matchTime, handleTip,
                         </Grid>
 
                         <Grid item md={6} xs={12}>
-                            <TextField label="Team 1" fullWidth required onChange={(e) => { setTeam1(e.target.value) }} />
+                            <TextField label="Team 1" fullWidth value = {team1} required onChange={(e) => { setTeam1(e.target.value) }} />
                         </Grid>
                         <Grid item md={6} xs={12}>
-                            <TextField label="Team 1" fullWidth required onChange={(e) => { setTeam2(e.target.value) }} />
+                            <TextField label="Team 1" fullWidth value = {team2} required onChange={(e) => { setTeam2(e.target.value) }} />
                         </Grid>
 
                         <Grid item md={6} xs={12}>
@@ -43,7 +43,7 @@ const InsertFields = ({ handleDate, handleTime, matchDate, matchTime, handleTip,
                                 <KeyboardDatePicker
                                     fullWidth
                                     label='Match Date'
-                                    value={matchDate}
+                                    value={match_date}
                                     onChange={handleDate}
                                 />
                             </MuiPickersUtilsProvider>
@@ -53,7 +53,7 @@ const InsertFields = ({ handleDate, handleTime, matchDate, matchTime, handleTip,
                                 <KeyboardTimePicker
                                     fullWidth
                                     label='Match Time'
-                                    value={matchTime}
+                                    value={match_time}
                                     onChange={handleTime}
                                 />
                             </MuiPickersUtilsProvider>
@@ -71,4 +71,4 @@ const InsertFields = ({ handleDate, handleTime, matchDate, matchTime, handleTip,
 
 }
 
-export default InsertFields;
+export default UpdatePrediction;

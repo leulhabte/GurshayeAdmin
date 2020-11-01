@@ -7,17 +7,27 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '3px'
     },
     pageButton:{
-        backgroundColor: 'rgb(128, 188, 49)',
+        backgroundColor: Constants.light_blue_2,
         color: 'white',
         height: '2rem',
         '&:hover':{
-            backgroundColor: 'rgb(113, 174,33)'
+            backgroundColor: Constants.light_blue
         },
         alignSelf: "center",
         marginLeft: theme.spacing(2)
     },
     tableContainer:{
         height: '28rem'
+    },
+    tableHead:{
+        color: 'white',
+        fontWeight: '700',
+        backgroundColor: Constants.light_blue_2
+    },
+    tableHead_2:{
+        color: 'white',
+        fontWeight: '700',
+        backgroundColor: Constants.light_blue
     },
 }));
 

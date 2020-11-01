@@ -1,11 +1,10 @@
 import React from 'react';
 import useStyles from './Styling';
 import { withStyles, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Box, Button, List, ListItem, ListItemText, IconButton } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import ContactSupport from '@material-ui/icons/ContactSupport';
 import {withRouter} from 'react-router-dom';
 
-const Heading = ({ data, removePreditcion, handleNext, handlePrev, page, totalPage, totalData, setDialog, setId, handleDialog, history }) => {
+const Heading = ({ data, is_correct, handleNext, handlePrev, page, totalPage, totalData, setDialog, setId, handleDialog, history }) => {
     const classes = useStyles();
     const StyledTableRow = withStyles((theme) => ({
         root: {
@@ -26,7 +25,7 @@ const Heading = ({ data, removePreditcion, handleNext, handlePrev, page, totalPa
                             <TableCell classes={{root: classes.tableHead_2}} align="center">Match Time</TableCell>
                             <TableCell classes={{root: classes.tableHead}} align="center">Match Date</TableCell>
                             <TableCell classes={{root: classes.tableHead_2}} align="center">Match Tip</TableCell>
-                            <TableCell classes={{root: classes.tableHead}} align="center">Action</TableCell>
+                            <TableCell classes={{root: classes.tableHead}} align="center">Is Correct?</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -37,11 +36,10 @@ const Heading = ({ data, removePreditcion, handleNext, handlePrev, page, totalPa
                                 <TableCell>{value.team_2}</TableCell>
                                 <TableCell>{value.match_time}</TableCell>
                                 <TableCell>{value.match_date}</TableCell>
-                                <TableCell>{value.match_prediction}</TableCell>
+                                <TableCell align="center">{value.match_prediction}</TableCell>
                                 <TableCell align="center">
                                     <Box display='flex' flexDirection='row' justifyContent="center">
-                                        <IconButton onClick={()=>{const current_information = value; history.push({pathname: '/update', state: {data: current_information}})}}><EditIcon classes={{ root: classes.edit }}/></IconButton>
-                                        <IconButton onClick={() => { setDialog(true); setId(value._id) }}><DeleteIcon classes={{ root: classes.remove }} /></IconButton>
+                                        <IconButton onClick={() => { setDialog(true); setId(value._id) }}><ContactSupport classes={{ root: classes.edit }} /></IconButton>
                                     </Box>
                                 </TableCell>
                             </StyledTableRow>

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Container, Box } from '@material-ui/core';
 import Heading from './Heading';
 import PredictionTable from './PredictionTable';
-import MessageDialog from './MessageDialog';
+import MessageDialog from './MessageDialog_1';
 import Cookies from 'js-cookie';
 import Loading from '../../Partials/Loading/Loading';
 import axios from 'axios';
-import SnackBar from '../../Partials/SnackBar/SnackBar';
 
-const ManagePrediction = ({ history }) => {
+const SetIsCorrect = ({ history }) => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [page, setPage] = useState(0);
@@ -16,15 +15,6 @@ const ManagePrediction = ({ history }) => {
     const [totalData, setTotalData] = useState(0);
     const [dialog, setDialog] = useState(false)
     const [id, setId] = useState("");
-    const [open, setOpen] = React.useState(false);
-    const [message, setMessage] = React.useState("");
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
     // ---------------
 
     // ---------------
@@ -43,7 +33,7 @@ const ManagePrediction = ({ history }) => {
         }
     }
     useEffect(() => {
-        fetchPrediction(1, 2);
+        fetchPrediction(1, 4);
     }, [])
 
     useEffect(() => {
@@ -52,22 +42,18 @@ const ManagePrediction = ({ history }) => {
 
     const fetchPrediction = (page, perPage) => {
         setLoading(true)
-        axios.get(`api/betting_tips/getPrediction/?page=${page}&perPage=${perPage}`,{
+        axios.get(`api/betting_tips/get_iscorrect/?page=${page}&&perPage=${perPage}&&is=N/A`,{
             headers: {
                 'Authorization': Cookies.get('jwt')
             }
         })
             .then(res => {
-                setData(res.data.betting_tips)
+                setData(res.data.un_marked)
                 setPage(res.data.page)
                 setTotalPage(res.data.total_pages)
                 setTotalData(res.data.total_data)
                 setLoading(false)
-            }).catch((err) => {
-                setLoading(false)
-                setMessage("Something went wrong Try again")
-                // setOpen(true);
-            })
+            }).catch(err => console.log(err))
     }
 
     const removePreditcion = async (id) => {
@@ -78,11 +64,24 @@ const ManagePrediction = ({ history }) => {
                     'Authorization': Cookies.get('jwt')
                 }
             })
-            if (res.status === 200) { fetchPrediction(page, 4); setOpen(true); setMessage("Prediction removed successfully") }
+            if (res.status === 200) { fetchPrediction(page, 4) }
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    const is_correct = async(id, is)=>{
+        try {
+            setLoading(true)
+            const res = await axios.post(`api/betting_tips/setCorrect?_id=${id}&&is=${is}`, null, {
+                headers: {
+                    'Authorization': Cookies.get('jwt')
+                }
+            })
+            if (res.status === 200) { fetchPrediction(page, 4) }
         } catch (error) {
             setLoading(false)
-            setMessage("Something went wrong Try again")
-            setOpen(true);
+            alert(error.message)
         }
     }
     return (
@@ -95,13 +94,12 @@ const ManagePrediction = ({ history }) => {
                         <PredictionTable data={data} fetchPrediction={fetchPrediction}
                             handleNext={handleNext} handlePrev={handlePrev} page={page} totalPage={totalPage} totalData={totalData}
                             removePreditcion={removePreditcion} handleDialog={handleDialog} setId={setId} setDialog={setDialog} />
-                        <MessageDialog handleDialog={handleDialog} id={id} dialog={dialog} removePreditcion={removePreditcion} />
+                        <MessageDialog handleDialog={handleDialog} id={id} dialog={dialog} is_correct={is_correct} />
                     </div>)}
             </div>
-            <SnackBar open={open} handleClose = {handleClose} message = {message}/>
         </Container>
     )
 
 }
 
-export default ManagePrediction;
+export default SetIsCorrect;

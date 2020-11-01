@@ -21,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
     prediction_box_4:{
         backgroundColor: Constants.green_2,
         color: 'white'
+    },
+    prediction_box_5:{
+        backgroundColor: Constants.red,
+        color: 'white'
+    },
+    prediction_box_6:{
+        backgroundColor: Constants.red_2,
+        color: 'white'
     }, 
     equilizer:{
         fontSize: '4rem'

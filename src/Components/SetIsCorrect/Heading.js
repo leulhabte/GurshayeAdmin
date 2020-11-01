@@ -9,9 +9,9 @@ const Heading =({title})=>{
         <div>
             <Breadcrumbs>
                 <Typography>Dashboard</Typography>
-                <Typography>Manage Prediction</Typography>
+                <Typography>Label Prediction</Typography>
             </Breadcrumbs>
-            <Typography classes = {{root: classes.heading}}>Manage Prediction</Typography>
+            <Typography classes = {{root: classes.heading}}>Label Prediction</Typography>
         </div>
     )
 
