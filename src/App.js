@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import Drawer from './Partials/Drawer/Drawer';
 import useStyles from './AppStyle';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
